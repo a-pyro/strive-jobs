@@ -1,6 +1,6 @@
 import { Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 
 const Job = ({ title, company, type, location, created_at, id }) => {
   return (
