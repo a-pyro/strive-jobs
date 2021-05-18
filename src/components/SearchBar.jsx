@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navbar, Container, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Container, Form, Button } from 'react-bootstrap';
 const SearchBar = ({ searchJobs }) => {
   const [fields, setFields] = useState({ position: '', area: '' });
   const handleChange = (e) => {
@@ -8,15 +8,15 @@ const SearchBar = ({ searchJobs }) => {
     setFields({ ...fields, [field]: value });
   };
   const handleSubmit = (e) => {
-    console.log('hi');
+    console.log(fields);
     e.preventDefault();
-    searchJobs(fields.postion, fields.area);
+    searchJobs(fields.position, fields.area);
   };
   return (
     <Navbar bg='dark' variant='dark'>
       <Container className='justify-content-end'>
         <Form onSubmit={handleSubmit} className='d-flex'>
-          <FormControl
+          <Form.Control
             onChange={handleChange}
             value={fields.position}
             type='text'
@@ -24,7 +24,7 @@ const SearchBar = ({ searchJobs }) => {
             className='mr-2'
             name='position'
           />
-          <FormControl
+          <Form.Control
             onChange={handleChange}
             value={fields.area}
             type='text'
@@ -32,7 +32,7 @@ const SearchBar = ({ searchJobs }) => {
             className='mx-2'
             name='area'
           />
-          <Button variant='outline-info' className='ml-2'>
+          <Button type='submit' variant='outline-info' className='ml-2'>
             Search
           </Button>
         </Form>

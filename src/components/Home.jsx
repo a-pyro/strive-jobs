@@ -26,7 +26,7 @@ const Home = () => {
   const searchJobs = async (position, area) => {
     try {
       const resp = await fetch(
-        `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions/.json?description=${position}&location=${area}`
+        `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions.json?description=${position}&location=${area}`
       );
       const data = await resp.json();
       console.log(data);

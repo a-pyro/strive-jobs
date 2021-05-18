@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import parse from 'html-react-parser';
 
 const Details = () => {
   const { id } = useParams();
@@ -36,11 +35,14 @@ const Details = () => {
               <Spinner animation='grow' />
             </div>
           ) : (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: `${job.description}`,
-              }}
-            />
+            <>
+              <img alt='job-logo' src={job.company_logo} className='mb-3' />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: `${job.description}`,
+                }}
+              />
+            </>
           )}
         </Col>
       </Row>
