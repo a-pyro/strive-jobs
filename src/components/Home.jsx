@@ -23,13 +23,26 @@ const Home = () => {
     }
   };
 
+  const searchJobs = async (position, area) => {
+    try {
+      const resp = await fetch(
+        `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions/.json?description=${position}&location=${area}`
+      );
+      const data = await resp.json();
+      console.log(data);
+      setJobs(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchJobs();
   }, []);
 
   return (
     <>
-      <SearchBar />
+      <SearchBar searchJobs={searchJobs} />
       <Container className='min-vh-100'>
         {(loading && (
           <Row className='justify-content-center mt-3'>

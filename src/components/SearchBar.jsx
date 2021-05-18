@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import { Navbar, Container, Form, FormControl, Button } from 'react-bootstrap';
-const SearchBar = () => {
-  const [fields, setFields] = useState({ postion: '', area: '' });
+const SearchBar = ({ searchJobs }) => {
+  const [fields, setFields] = useState({ position: '', area: '' });
   const handleChange = (e) => {
     const field = e.target.name;
     const value = e.target.value;
     setFields({ ...fields, [field]: value });
   };
-
+  const handleSubmit = (e) => {
+    console.log('hi');
+    e.preventDefault();
+    searchJobs(fields.postion, fields.area);
+  };
   return (
     <Navbar bg='dark' variant='dark'>
       <Container className='justify-content-end'>
-        <Form className='d-flex'>
+        <Form onSubmit={handleSubmit} className='d-flex'>
           <FormControl
             onChange={handleChange}
             value={fields.position}

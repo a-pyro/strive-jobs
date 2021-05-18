@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 
@@ -15,24 +15,34 @@ const Details = () => {
         `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions/${id}.json`
       );
       const data = await resp.json();
-      console.log(data);
       setJob(data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchJob();
   }, []);
-
+  console.log(job);
   return (
-    <Container>
+    <Container className='min-vh-100'>
       <Row className='mt-3 text-white'>
         {/* <Col xs={12}>{job.description}</Col> */}
-        <Col xs={12}>{parse(job.description && job.description)}</Col>
+        <Col xs={12}>
+          {loading === true || job === 'undefined' ? (
+            <div className='d-flex justify-content-center'>
+              <Spinner animation='grow' />
+            </div>
+          ) : (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: `${job.description}`,
+              }}
+            />
+          )}
+        </Col>
       </Row>
     </Container>
   );
