@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container, Spinner } from 'react-bootstrap';
+import { Container, Row, Spinner } from 'react-bootstrap';
 import Joblist from './Joblist';
 import SearchBar from './SearchBar';
 
@@ -9,18 +9,20 @@ const Home = () => {
   const fetchJobs = async () => {
     try {
       setLoading(true);
-      // const resp = await fetch(
-      //   `${process.env.REACT_APP_API_URL}/postions?description=react&location=miami.json`
-      // );
+
       const resp = await fetch(
         'https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions.json'
       );
       const data = await resp.json();
       console.log(data);
+      setJobs(data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchJobs();
   }, []);
@@ -29,7 +31,15 @@ const Home = () => {
     <>
       <SearchBar />
       <Container className='min-vh-100'>
-        <Joblist jobs={jobs} />
+        {(loading && (
+          <Row className='justify-content-center mt-3'>
+            <Spinner animation='grow' />
+          </Row>
+        )) || (
+          <Row className='mt-3'>
+            <Joblist jobs={jobs} />
+          </Row>
+        )}
       </Container>
     </>
   );

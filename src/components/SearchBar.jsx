@@ -7,6 +7,7 @@ const SearchBar = () => {
     const value = e.target.value;
     setFields({ ...fields, [field]: value });
   };
+
   return (
     <Navbar bg='dark' variant='dark'>
       <Container className='justify-content-end'>
