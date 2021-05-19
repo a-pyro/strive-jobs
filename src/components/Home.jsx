@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container, Row, Spinner } from 'react-bootstrap';
+import { Button, Container, Row, Spinner } from 'react-bootstrap';
 import Joblist from './Joblist';
 import SearchBar from './SearchBar';
 
@@ -49,9 +49,21 @@ const Home = () => {
             <Spinner animation='grow' />
           </Row>
         )) || (
-          <Row className='mt-3'>
-            <Joblist jobs={jobs} />
-          </Row>
+          <>
+            <Row className='mt-3'>
+              <Joblist jobs={jobs} />
+            </Row>{' '}
+            <Button
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+              variant='info'
+              style={{ position: 'sticky', bottom: '0' }}
+              className='rounded-circle lh-base d-block ms-auto'
+            >
+              🔝
+            </Button>
+          </>
         )}
       </Container>
     </>
