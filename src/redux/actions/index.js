@@ -3,7 +3,7 @@ export const addFavourite = (job) => ({
   payload: job,
 });
 
-export const removeFavourite = (idx) => ({
+export const removeFavourite = (id) => ({
   type: 'REMOVE_FAVOURITE',
-  payload: idx,
+  payload: id,
 });
