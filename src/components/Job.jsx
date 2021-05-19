@@ -1,5 +1,5 @@
-import { Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Col, Badge } from 'react-bootstrap';
+import { Link, useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 import { connect } from 'react-redux';
 import { addFavourite, removeFavourite } from 'redux/actions';
@@ -20,6 +20,7 @@ const Job = ({
   removeFavourite,
   job,
 }) => {
+  const history = useHistory();
   const handleAddFav = () => {
     addFavourite(job);
   };
@@ -30,29 +31,46 @@ const Job = ({
 
   return (
     <Col xs={12}>
-      <div className='d-flex border-bottom justify-content-between py-2'>
+      <div
+        style={{ backgroundColor: '#fffbdf', borderRadius: '15px' }}
+        className='d-flex border-bottom justify-content-between py-4 px-3 mb-3 shadow'
+      >
         <div>
-          <Link style={{ color: 'white' }} to={`/details/${id}`}>
-            {title}
-          </Link>
-          <p className='mb-0'>
-            {company} - <span>{type}</span>
+          <h6 className='mb-0'>{title}</h6>
+          <p className='my-2'>
+            {company} - <span className='fw-bold'>{type}</span>
           </p>
           {favourites.some((job) => job.id === id) ? (
-            <span onClick={handleRemoveFav} style={{ cursor: 'pointer' }}>
-              💔
-            </span>
+            <>
+              <span onClick={handleRemoveFav} style={{ cursor: 'pointer' }}>
+                💔
+              </span>
+              <Badge
+                onClick={() => history.push(`/details/${id}`)}
+                style={{ cursor: 'pointer', background: '#34656d' }}
+                className='lh-base ms-3'
+              >
+                Details
+              </Badge>
+            </>
           ) : (
-            <span onClick={handleAddFav} style={{ cursor: 'pointer' }}>
-              ❤️
-            </span>
+            <>
+              <span onClick={handleAddFav} style={{ cursor: 'pointer' }}>
+                ❤️
+              </span>
+              <Badge
+                onClick={() => history.push(`/details/${id}`)}
+                style={{ cursor: 'pointer', background: '#34656d' }}
+                className='lh-base ms-3'
+              >
+                Details
+              </Badge>
+            </>
           )}
         </div>
-        <div className='text-right'>
-          <p className='text-right mb-0'>{location}</p>
-          <p className='text-right mb-0'>
-            {format(new Date(created_at), 'MM/dd/yyyy')}
-          </p>
+        <div className='d-flex flex-column justify-content-center align-items-end'>
+          <p className='mb-0'>{location}</p>
+          <p className='mb-0'>{format(new Date(created_at), 'MM/dd/yyyy')}</p>
         </div>
       </div>
     </Col>

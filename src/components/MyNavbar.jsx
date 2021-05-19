@@ -10,7 +10,7 @@ const MyNavbar = ({ favouritesLength }) => {
   let history = useHistory();
 
   return (
-    <Navbar bg='info'>
+    <Navbar style={{ background: '#34656d' }}>
       <Container className='justify-content-start'>
         <Button
           variant='warning'

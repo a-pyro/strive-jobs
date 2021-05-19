@@ -13,7 +13,11 @@ const SearchBar = ({ searchJobs }) => {
     searchJobs(fields.position, fields.area);
   };
   return (
-    <Navbar bg='dark' variant='dark'>
+    <Navbar
+      className='sticky-top'
+      style={{ background: '#c6ffc1' }}
+      variant='dark'
+    >
       <Container className='justify-content-end'>
         <Form onSubmit={handleSubmit} className='d-flex'>
           <Form.Control
@@ -21,7 +25,7 @@ const SearchBar = ({ searchJobs }) => {
             value={fields.position}
             type='text'
             placeholder='Insert Position'
-            className='mr-2'
+            className='mr-2 rounded-pill'
             name='position'
           />
           <Form.Control
@@ -29,10 +33,14 @@ const SearchBar = ({ searchJobs }) => {
             value={fields.area}
             type='text'
             placeholder='Insert Area'
-            className='mx-2'
+            className='mx-2 rounded-pill'
             name='area'
           />
-          <Button type='submit' variant='outline-info' className='ml-2'>
+          <Button
+            type='submit'
+            variant='outline-info'
+            className='ml-2 rounded-pill'
+          >
             Search
           </Button>
         </Form>

@@ -1,14 +1,12 @@
 import { Col, Container, Row, ListGroup, Button, Badge } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { removeFavourite } from 'redux/actions';
-import { useHistory } from 'react-router-dom';
 
 const mapStatetoProps = (state) => ({
   favourites: state.favourites,
 });
 
-const Favourites = ({ favourites, removeFavourite }) => {
-  const history = useHistory();
+const Favourites = ({ favourites, removeFavourite, history }) => {
   const handleRemoveFav = (id) => {
     removeFavourite(id);
   };
@@ -34,7 +32,11 @@ const Favourites = ({ favourites, removeFavourite }) => {
           )}
           <ListGroup>
             {favourites.map((fav) => (
-              <ListGroup.Item key={fav.id} className='d-flex lh-lg'>
+              <ListGroup.Item
+                style={{ background: '#fffbdf', borderRadius: '15px' }}
+                key={fav.id}
+                className='d-flex lh-lg'
+              >
                 <span className='me-auto'>
                   {fav.title} - {fav.company}
                 </span>
@@ -49,8 +51,8 @@ const Favourites = ({ favourites, removeFavourite }) => {
 
                 <Badge
                   onClick={() => history.push(`/details/${fav.id}`)}
-                  style={{ cursor: 'pointer' }}
-                  className='bg-secondary lh-lg'
+                  style={{ cursor: 'pointer', background: '#34656d' }}
+                  className='rounded-pill lh-lg'
                 >
                   Details
                 </Badge>
