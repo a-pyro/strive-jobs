@@ -1,4 +1,4 @@
-import { Button, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { connect } from 'react-redux';
