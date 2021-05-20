@@ -4,9 +4,12 @@ import { format } from 'date-fns';
 import { connect } from 'react-redux';
 import { addFavourite, removeFavourite } from 'redux/actions';
 
-const mapStateToProps = (state) => ({
-  favourites: state.favourites,
-});
+const mapStateToProps = (state) => {
+  // console.log(state);
+  return {
+    favList: state.favourites.favList,
+  };
+};
 
 const Job = ({
   title,
@@ -15,7 +18,7 @@ const Job = ({
   location,
   created_at,
   id,
-  favourites,
+  favList,
   addFavourite,
   removeFavourite,
   job,
@@ -40,7 +43,7 @@ const Job = ({
           <p className='my-2'>
             {company} - <span className='fw-bold'>{type}</span>
           </p>
-          {favourites.some((job) => job.id === id) ? (
+          {favList.some((job) => job.id === id) ? (
             <>
               <span onClick={handleRemoveFav} style={{ cursor: 'pointer' }}>
                 💔

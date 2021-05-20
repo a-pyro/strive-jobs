@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
-  favouritesLength: state.favourites.length,
+  favouritesLength: state.favourites.favList.length,
 });
 
 const MyNavbar = ({ favouritesLength }) => {
