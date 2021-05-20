@@ -3,6 +3,8 @@ import favouritesReducer from 'redux/reducers/favourites';
 import jobReducer from 'redux/reducers/jobs';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 export const initialState = {
   favourites: {
@@ -21,7 +23,16 @@ const rootReducer = combineReducers({
 });
 
 const composedEnhancers = composeWithDevTools(applyMiddleware(thunk));
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['favourites'],
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(rootReducer, composedEnhancers);
+export const store = createStore(persistedReducer, composedEnhancers);
+export const persistor = persistStore(store);
 
-export default store;
+// export e configurazione senza persist
+// const store = createStore(rootReducer, composedEnhancers);
+// export default store;
