@@ -30,6 +30,7 @@ const SearchBar = ({ searchJob }) => {
             placeholder='Insert Position'
             className='mr-2 rounded-pill'
             name='position'
+            autoFocus
           />
           <Form.Control
             onChange={handleChange}

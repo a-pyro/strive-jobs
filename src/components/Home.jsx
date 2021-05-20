@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button, Container, Row, Spinner } from 'react-bootstrap';
 import Joblist from './Joblist';
 import SearchBar from './SearchBar';
