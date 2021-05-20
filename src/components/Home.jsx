@@ -2,48 +2,53 @@ import { useEffect, useState } from 'react';
 import { Button, Container, Row, Spinner } from 'react-bootstrap';
 import Joblist from './Joblist';
 import SearchBar from './SearchBar';
+import { connect } from 'react-redux';
+import { fetchJobs } from 'redux/actions/jobs';
 
-const Home = () => {
-  const [jobs, setJobs] = useState([]);
-  const [loading, setLoading] = useState(false);
+const mapStateToProps = (state) => state.jobs;
 
-  const fetchJobs = async () => {
-    try {
-      setLoading(true);
+const Home = ({ jobList, loading, error, fetchJobs }) => {
+  // const [jobs, setJobs] = useState([]);
+  // const [loading, setLoading] = useState(false);
 
-      const resp = await fetch(
-        `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions.json`
-      );
-      const data = await resp.json();
+  // const fetchJobs = async () => {
+  //   try {
+  //     setLoading(true);
 
-      setJobs(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     const resp = await fetch(
+  //       `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions.json`
+  //     );
+  //     const data = await resp.json();
 
-  const searchJobs = async (position, area) => {
-    try {
-      const resp = await fetch(
-        `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions.json?description=${position}&location=${area}`
-      );
-      const data = await resp.json();
-      console.log(data);
-      setJobs(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     setJobs(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // const searchJobs = async (position, area) => {
+  //   try {
+  //     const resp = await fetch(
+  //       `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions.json?description=${position}&location=${area}`
+  //     );
+  //     const data = await resp.json();
+  //     console.log(data);
+  //     setJobs(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     fetchJobs();
-  }, []);
+  }, [fetchJobs]);
 
   return (
     <>
-      <SearchBar searchJobs={searchJobs} />
+      {/* <SearchBar searchJobs={searchJobs} /> */}
+      <SearchBar />
       <Container className='min-vh-100'>
         {(loading && (
           <Row className='justify-content-center mt-3'>
@@ -52,7 +57,7 @@ const Home = () => {
         )) || (
           <>
             <Row className='mt-3'>
-              <Joblist jobs={jobs} />
+              <Joblist jobs={jobList} />
             </Row>{' '}
             <Button
               onClick={() => {
@@ -71,4 +76,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default connect(mapStateToProps, { fetchJobs })(Home);

@@ -1,16 +1,25 @@
 import { initialState } from 'redux/store';
 const jobReducer = (state = initialState.jobs, action) => {
   switch (action.type) {
-    // case 'ADD_FAVOURITE':
-    //   return {
-    //     ...state,
-    //     favourites: [...state.favourites, action.payload],
-    //   };
-    // case 'REMOVE_FAVOURITE':
-    //   return {
-    //     ...state,
-    //     favourites: state.favourites.filter((el) => el.id !== action.payload),
-    //   };
+    case 'GET_JOBS_LOADING':
+      return {
+        ...state,
+        error: false,
+        loading: true,
+      };
+    case 'GET_JOBS_SUCCESS':
+      return {
+        ...state,
+        jobList: action.payload,
+        error: false,
+        loading: false,
+      };
+    case 'GET_JOBS_FAILURE':
+      return {
+        ...state,
+        error: true,
+        loading: false,
+      };
 
     default:
       return state;

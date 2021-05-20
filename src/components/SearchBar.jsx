@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { Navbar, Container, Form, Button } from 'react-bootstrap';
-const SearchBar = ({ searchJobs }) => {
+import { connect } from 'react-redux';
+import { searchJob } from 'redux/actions/jobs';
+
+const SearchBar = ({ searchJob }) => {
   const [fields, setFields] = useState({ position: '', area: '' });
   const handleChange = (e) => {
     const field = e.target.name;
@@ -10,7 +13,7 @@ const SearchBar = ({ searchJobs }) => {
   const handleSubmit = (e) => {
     console.log(fields);
     e.preventDefault();
-    searchJobs(fields.position, fields.area);
+    searchJob(fields.position, fields.area);
   };
   return (
     <Navbar
@@ -49,4 +52,4 @@ const SearchBar = ({ searchJobs }) => {
   );
 };
 
-export default SearchBar;
+export default connect(null, { searchJob })(SearchBar);

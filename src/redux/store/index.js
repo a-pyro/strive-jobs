@@ -1,6 +1,8 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import favouritesReducer from 'redux/reducers/favourites';
 import jobReducer from 'redux/reducers/jobs';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
 export const initialState = {
   favourites: {
@@ -8,17 +10,18 @@ export const initialState = {
   },
   jobs: {
     jobList: [],
+    error: false,
+    loading: false,
   },
 };
+
 const rootReducer = combineReducers({
   jobs: jobReducer,
   favourites: favouritesReducer,
 });
 
-const configureStore = createStore(
-  rootReducer,
-  initialState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const composedEnhancers = composeWithDevTools(applyMiddleware(thunk));
 
-export default configureStore;
+const store = createStore(rootReducer, initialState, composedEnhancers);
+
+export default store;
