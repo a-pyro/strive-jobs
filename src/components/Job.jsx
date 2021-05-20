@@ -1,5 +1,5 @@
 import { Col, Badge } from 'react-bootstrap';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 import { connect } from 'react-redux';
 import { addFavourite, removeFavourite } from 'redux/actions';
@@ -33,7 +33,7 @@ const Job = ({
     <Col xs={12}>
       <div
         style={{ backgroundColor: '#fffbdf', borderRadius: '15px' }}
-        className='d-flex border-bottom justify-content-between py-4 px-3 mb-3 shadow'
+        className='d-flex border-bottom justify-content-between py-4 px-4 mb-3 shadow'
       >
         <div>
           <h6 className='mb-0'>{title}</h6>
@@ -48,7 +48,7 @@ const Job = ({
               <Badge
                 onClick={() => history.push(`/details/${id}`)}
                 style={{ cursor: 'pointer', background: '#34656d' }}
-                className='lh-base ms-3'
+                className='lh-base ms-3 rounded-pill'
               >
                 Details
               </Badge>
@@ -61,7 +61,7 @@ const Job = ({
               <Badge
                 onClick={() => history.push(`/details/${id}`)}
                 style={{ cursor: 'pointer', background: '#34656d' }}
-                className='lh-base ms-3'
+                className='lh-base ms-3 rounded-pill'
               >
                 Details
               </Badge>

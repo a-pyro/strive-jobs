@@ -6,15 +6,16 @@ import SearchBar from './SearchBar';
 const Home = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const fetchJobs = async () => {
     try {
       setLoading(true);
 
       const resp = await fetch(
-        'https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions.json'
+        `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions.json`
       );
       const data = await resp.json();
-      console.log(data);
+
       setJobs(data);
     } catch (error) {
       console.log(error);

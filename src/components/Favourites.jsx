@@ -35,7 +35,7 @@ const Favourites = ({ favourites, removeFavourite, history }) => {
               <ListGroup.Item
                 style={{ background: '#fffbdf', borderRadius: '15px' }}
                 key={fav.id}
-                className='d-flex lh-lg'
+                className='d-flex lh-lg mb-3 shadow'
               >
                 <span className='me-auto'>
                   {fav.title} - {fav.company}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ const Details = () => {
   const [job, setJob] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const fetchJob = async () => {
+  const fetchJob = useCallback(async () => {
     try {
       setLoading(true);
       const resp = await fetch(
@@ -19,11 +19,40 @@ const Details = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
+    // const fetchJob = async () => {
+    //   try {
+    //     setLoading(true);
+    //     const resp = await fetch(
+    //       `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions/${id}.json`
+    //     );
+    //     const data = await resp.json();
+    //     setJob(data);
+    //     setLoading(false);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+
     fetchJob();
-  }, []);
+
+    // (async () => {
+    //   try {
+    //     setLoading(true);
+    //     const resp = await fetch(
+    //       `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions/${id}.json`
+    //     );
+    //     const data = await resp.json();
+    //     setJob(data);
+    //     setLoading(false);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // })();
+  }, [fetchJob]);
+
   console.log(job);
   return (
     <Container className='min-vh-100'>
