@@ -3,7 +3,9 @@ import Favourites from 'components/Favourites';
 import Home from 'components/Home';
 import MyNavbar from 'components/MyNavbar';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
+toast.configure();
 function App() {
   return (
     <>
