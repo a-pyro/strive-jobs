@@ -13,7 +13,7 @@ const Home = ({ jobList, loading, error, fetchJobs }) => {
 
   // const fetchJobs = async () => {
   //   try {
-  //     setLoading(true);
+  //     setLoading(tru);
 
   //     const resp = await fetch(
   //       `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions.json`
@@ -43,6 +43,7 @@ const Home = ({ jobList, loading, error, fetchJobs }) => {
 
   useEffect(() => {
     fetchJobs();
+    return () => {};
   }, [fetchJobs]);
 
   return (

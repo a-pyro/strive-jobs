@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 import { connect } from 'react-redux';
 import { addFavourite, removeFavourite } from 'redux/actions';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const mapStateToProps = (state) => {
   // console.log(state);
@@ -26,7 +26,7 @@ const Job = ({
 }) => {
   const history = useHistory();
   const handleAddFav = () => {
-    toast.success(`${title} Added`);
+    toast(`${title} Added`);
     addFavourite(job);
   };
 
