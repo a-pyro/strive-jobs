@@ -8,39 +8,6 @@ import { fetchJobs } from 'redux/actions/jobs';
 const mapStateToProps = (state) => state.jobs;
 
 const Home = ({ jobList, loading, error, fetchJobs }) => {
-  // const [jobs, setJobs] = useState([]);
-  // const [loading, setLoading] = useState(false);
-
-  // const fetchJobs = async () => {
-  //   try {
-  //     setLoading(tru);
-
-  //     const resp = await fetch(
-  //       `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions.json`
-  //     );
-  //     const data = await resp.json();
-
-  //     setJobs(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // const searchJobs = async (position, area) => {
-  //   try {
-  //     const resp = await fetch(
-  //       `https://spotify-fetch.herokuapp.com/https://jobs.github.com/positions.json?description=${position}&location=${area}`
-  //     );
-  //     const data = await resp.json();
-  //     console.log(data);
-  //     setJobs(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   useEffect(() => {
     fetchJobs();
     return () => {};
